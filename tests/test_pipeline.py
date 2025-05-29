@@ -3,10 +3,12 @@
 
 
 
+
 import asyncio
 from unittest.mock import AsyncMock, patch
 
 import pytest
+
 
 
 
@@ -15,8 +17,10 @@ from src import rag_chat
 
 
 
+
 @pytest.mark.asyncio
 async def test_answer_returns_string():
+
 
 
     with patch.object(rag_chat, "get_chat") as mock_chat:

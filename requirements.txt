@@ -2,7 +2,9 @@ faiss-cpu==1.8.0
 sentence-transformers==2.6.1
 
 
+
 ctransformers==0.2.27
+
 
 
 gradio==4.21.0

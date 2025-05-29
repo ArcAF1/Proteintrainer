@@ -14,6 +14,7 @@ from pathlib import Path
 
 
 
+
 from typing import List
 
 
@@ -24,19 +25,23 @@ import numpy as np
 from ctransformers import AutoModelForCausalLM
 
 
+
 from .config import settings
 from .embeddings import Embedder
 
 
 
 
+
 class RAGChat:
+
 
     def __init__(self) -> None:
         self.embedder = Embedder()
         index_path = settings.index_dir / "pmc.faiss"
         store_path = settings.index_dir / "pmc.pkl"
         if not index_path.exists() or not store_path.exists():
+
 
 
             raise FileNotFoundError("Index files not found. Run indexer first.")
@@ -80,13 +85,16 @@ _chat = None
 
 
 
+
 def get_chat() -> RAGChat:
     global _chat
+
 
 
     if _chat is None:
         _chat = RAGChat()
     return _chat
+
 
 
 

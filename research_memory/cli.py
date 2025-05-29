@@ -1,11 +1,14 @@
 
 
+
 """Command line interface for ResearchMemory."""
+
 
 from __future__ import annotations
 
 import argparse
 from pathlib import Path
+
 
 import json
 
@@ -30,9 +33,11 @@ def get_parser() -> argparse.ArgumentParser:
 
     update_p = sub.add_parser("update")
 
+
     update_p.add_argument("id")
     update_p.add_argument("--status", required=True)
     update_p.add_argument("--confidence", type=float)
+
 
 
     return p

@@ -8,7 +8,9 @@ import pickle
 
 
 
+
 from typing import Iterable
+
 
 
 
@@ -56,7 +58,6 @@ def main() -> None:
     index, store = build_index(docs)
     save_index(index, store)
     print("Index built with", len(store), "documents")
-
 
 
 if __name__ == "__main__":

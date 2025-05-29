@@ -3,7 +3,9 @@
 
 
 
+
 This project provides a lightweight offline chat assistant for medical research. It uses open-source models and datasets to run entirely on a MacBook M1 with 16 GB RAM.
+
 
 
 
@@ -12,6 +14,7 @@ This project provides a lightweight offline chat assistant for medical research.
 
 ## Setup
 1. Install [Homebrew](https://brew.sh/) if missing.
+
 
 
 
@@ -28,6 +31,7 @@ This project provides a lightweight offline chat assistant for medical research.
    source venv/bin/activate
    pip install -r requirements.txt
    ```
+
 
 
 4. Download sentence-transformer and LLM weights manually (see `data_sources.json`).
