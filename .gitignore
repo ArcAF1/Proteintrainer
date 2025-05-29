@@ -4,6 +4,7 @@ venv/
 .env
 indexes/
 data/
+
 *.faiss
 *.bin
 

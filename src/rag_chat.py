@@ -15,6 +15,7 @@ from pathlib import Path
 
 
 
+
 from typing import List
 
 
@@ -26,6 +27,7 @@ from ctransformers import AutoModelForCausalLM
 
 
 
+
 from .config import settings
 from .embeddings import Embedder
 
@@ -33,7 +35,9 @@ from .embeddings import Embedder
 
 
 
+
 class RAGChat:
+
 
 
     def __init__(self) -> None:
@@ -45,6 +49,7 @@ class RAGChat:
 
 
             raise FileNotFoundError("Index files not found. Run indexer first.")
+
 
 
 
@@ -86,8 +91,10 @@ _chat = None
 
 
 
+
 def get_chat() -> RAGChat:
     global _chat
+
 
 
 
@@ -100,8 +107,10 @@ def get_chat() -> RAGChat:
 
 
 
+
 async def answer(question: str) -> str:
     return await get_chat().answer(question)
+
 
 
 

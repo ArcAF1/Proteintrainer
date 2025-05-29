@@ -11,7 +11,9 @@ from pathlib import Path
 
 
 
+
 from typing import Dict
+
 
 
 
@@ -36,8 +38,10 @@ def download(url: str, dest: Path) -> Path:
 
 
 
+
     if "TODO" in url:
         raise ValueError(f"Download URL not provided for {dest.name}")
+
 
 
 
@@ -57,7 +61,9 @@ def extract_archive(archive: Path, out_dir: Path) -> None:
 
 
 
+
     shutil.unpack_archive(str(archive), str(out_dir))
+
 
 
 
@@ -76,7 +82,9 @@ def main() -> None:
 
 
 
+
             print("TODO: provide valid URL in data_sources.json")
+
 
 
 

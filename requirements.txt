@@ -3,7 +3,9 @@ sentence-transformers==2.6.1
 
 
 
+
 ctransformers==0.2.27
+
 
 
 

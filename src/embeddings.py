@@ -8,7 +8,9 @@ Usage example:
 
 
 
+
 from typing import Optional
+
 
 
 
@@ -27,5 +29,4 @@ class Embedder:
     def encode(self, text: str) -> np.ndarray:
         vector = self.model.encode(text, normalize_embeddings=True)
         return np.array(vector, dtype="float32")
-
 

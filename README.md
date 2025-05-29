@@ -4,7 +4,9 @@
 
 
 
+
 This project provides a lightweight offline chat assistant for medical research. It uses open-source models and datasets to run entirely on a MacBook M1 with 16 GB RAM.
+
 
 
 
@@ -18,9 +20,11 @@ This project provides a lightweight offline chat assistant for medical research.
 
 
 
+
 2. Install Python 3.12 via Homebrew:
    ```bash
    brew install python@3.12
+
 
 
 
@@ -34,8 +38,10 @@ This project provides a lightweight offline chat assistant for medical research.
 
 
 
+
 4. Download sentence-transformer and LLM weights manually (see `data_sources.json`).
 5. Place downloaded models under `models/` and datasets under `data/`.
+
 
 ## Building the Index
 Run the indexer after datasets are prepared:
@@ -59,12 +65,14 @@ pytest
 ```
 
 
+
 ## Data Sources
 Dataset download links are placeholders in `src/data_sources.json`. Fill them in and execute:
 ```bash
 python src/data_ingestion.py
 ```
 This may take a long time and requires substantial disk space.
+
 
 
 

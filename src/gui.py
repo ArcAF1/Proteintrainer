@@ -4,9 +4,11 @@ Usage example:
     python src/gui.py
 """
 import asyncio
+
 import gradio as gr
 
 from .rag_chat import answer
+
 
 
 def chat(query: str, history: list[tuple[str, str]]) -> str:
@@ -21,7 +23,9 @@ def main() -> None:
 
 
 
+
     demo.launch()
+
 
 
 
