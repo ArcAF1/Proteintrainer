@@ -2,6 +2,7 @@
 
 This project provides a lightweight offline chat assistant for medical research. It uses open-source models and datasets to run entirely on a MacBook M1 with 16 GB RAM.
 
+
 **Disclaimer:** This software is for research purposes only and does **not** constitute medical advice.
 
 ## Setup
@@ -39,6 +40,7 @@ Run the basic pipeline test:
 pytest
 ```
 
+
 ## Data Sources
 Dataset download links are placeholders in `src/data_sources.json`. Fill them in and execute:
 ```bash
@@ -46,4 +48,6 @@ python src/data_ingestion.py
 ```
 This may take a long time and requires substantial disk space.
 
+
+<
 

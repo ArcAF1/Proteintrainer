@@ -1,13 +1,15 @@
+
+
+
 import asyncio
 from unittest.mock import AsyncMock, patch
-from pathlib import Path
-import sys
 
 import pytest
 
-sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
-pytest.importorskip("numpy")
-import rag_chat
+
+
+from src import rag_chat
+
 
 
 @pytest.mark.asyncio
