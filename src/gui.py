@@ -17,7 +17,12 @@ def main() -> None:
     with gr.Blocks() as demo:
         gr.Markdown("# Offline Medical Assistant\n*Not medical advice*")
         gr.ChatInterface(fn=chat)
+
+
+
     demo.launch()
+
+
 
 
 if __name__ == "__main__":

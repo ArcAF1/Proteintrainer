@@ -1,27 +1,42 @@
+
+
+"""Pydantic models for public API."""
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import datetime
-from typing import List, Optional, Dict
+from typing import List, Optional
+from pydantic import BaseModel, Field
 
 
-@dataclass
-class Entry:
-    """Single notebook entry."""
-
+class EntryBase(BaseModel):
     id: str
+    created_at: str
     type: str
     title: str
-    body: str
-    created_at: datetime
+    body_md: str
     status: str
     confidence: Optional[float] = None
-    tags: Optional[List[str]] = None
-    links: Optional[List[Dict]] = None
+    tags: Optional[str] = None
+    links: Optional[list] = None
     revises_id: Optional[str] = None
 
 
-@dataclass
-class SearchHit:
-    entry: Entry
+class EntryOut(EntryBase):
+    pass
+
+
+class EntryCreate(BaseModel):
+    type: str
+    title: str
+    body: str
+    status: str = "open"
+    confidence: Optional[float] = None
+    tags: Optional[List[str]] = None
+    links: Optional[List[dict]] = None
+    revises_id: Optional[str] = None
+
+
+class SearchHit(BaseModel):
+    entry: EntryOut
     score: float
+
+

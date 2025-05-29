@@ -3,7 +3,13 @@
 ├── requirements.txt
 ├── project_structure.txt
 ├── README.md
+
+
+
+
 ├── src/
+
+
 │   ├── config.py
 │   ├── embeddings.py
 │   ├── indexer.py
@@ -11,6 +17,15 @@
 │   ├── data_ingestion.py
 │   ├── rag_chat.py
 │   └── gui.py
+
+
+
+
+
 └── tests/
     └── test_pipeline.py
+
+
+
+
 
