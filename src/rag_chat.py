@@ -11,7 +11,9 @@ import pickle
 from pathlib import Path
 from typing import List
 
+
 import faiss
+
 import numpy as np
 from ctransformers import AutoModelForCausalLM
 
@@ -26,6 +28,8 @@ class RAGChat:
         store_path = settings.index_dir / "pmc.pkl"
         if not index_path.exists() or not store_path.exists():
             raise FileNotFoundError("Index files not found. Run indexer first.")
+
+
         self.index = faiss.read_index(str(index_path))
         with open(store_path, "rb") as fh:
             self.docs = pickle.load(fh)
