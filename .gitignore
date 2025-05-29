@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+venv/
+.env
+indexes/
+data/
+neo4j/
+models/lora/
+*.faiss
+*.bin
+

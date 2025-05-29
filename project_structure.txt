@@ -1,0 +1,22 @@
+.
+├── .gitignore
+├── requirements.txt
+├── project_structure.txt
+├── README.md
+├── src/
+│   ├── config.py
+│   ├── embeddings.py
+│   ├── indexer.py
+│   ├── data_sources.json
+│   ├── data_ingestion.py
+│   ├── fine_tune.py
+│   ├── neo4j_setup.py
+│   ├── graph_builder.py
+│   ├── graph_query.py
+│   ├── rag_chat.py
+│   └── gui.py
+└── tests/
+    ├── test_pipeline.py
+    ├── test_fine_tune.py
+    └── test_graph.py
+
