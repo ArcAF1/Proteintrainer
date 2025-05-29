@@ -4,8 +4,7 @@ venv/
 .env
 indexes/
 data/
-neo4j/
-models/lora/
+
 *.faiss
 *.bin
 

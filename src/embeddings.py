@@ -4,7 +4,16 @@ Usage example:
     from embeddings import Embedder
     vec = Embedder().encode("hello")
 """
+
+
+
+
+
 from typing import Optional
+
+
+
+
 import numpy as np
 from sentence_transformers import SentenceTransformer
 

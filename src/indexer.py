@@ -5,7 +5,17 @@ Usage example:
 """
 from pathlib import Path
 import pickle
+
+
+
+
+
 from typing import Iterable
+
+
+
+
+
 
 import faiss
 import numpy as np
@@ -13,6 +23,7 @@ from tqdm import tqdm
 
 from .config import settings
 from .embeddings import Embedder
+
 
 
 def load_documents() -> list[str]:
@@ -33,6 +44,7 @@ def build_index(docs: Iterable[str]) -> tuple[faiss.IndexFlatIP, list[str]]:
 
 
 def save_index(index: faiss.IndexFlatIP, docs: list[str]) -> None:
+
     settings.index_dir.mkdir(parents=True, exist_ok=True)
     index_path = settings.index_dir / "pmc.faiss"
     faiss.write_index(index, str(index_path))
