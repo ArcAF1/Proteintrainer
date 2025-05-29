@@ -1,4 +1,5 @@
 
+
 """Electronic Lab Notebook interface for the RAG assistant.
 
 Usage example:
@@ -158,4 +159,5 @@ class ResearchMemory:
 
 
 __all__ = ["ResearchMemory", "EntryOut", "SearchHit"]
+
 

@@ -13,6 +13,7 @@ import pickle
 from pathlib import Path
 
 
+
 from typing import List
 
 
@@ -28,6 +29,7 @@ from .embeddings import Embedder
 
 
 
+
 class RAGChat:
 
     def __init__(self) -> None:
@@ -36,7 +38,9 @@ class RAGChat:
         store_path = settings.index_dir / "pmc.pkl"
         if not index_path.exists() or not store_path.exists():
 
+
             raise FileNotFoundError("Index files not found. Run indexer first.")
+
 
 
 
@@ -58,7 +62,6 @@ class RAGChat:
         return [self.docs[i] for i in ids[0]]
 
 
-
     async def generate(self, prompt: str) -> str:
         loop = asyncio.get_running_loop()
         return await loop.run_in_executor(None, self.llm, prompt)
@@ -76,8 +79,10 @@ _chat = None
 
 
 
+
 def get_chat() -> RAGChat:
     global _chat
+
 
     if _chat is None:
         _chat = RAGChat()
@@ -86,7 +91,9 @@ def get_chat() -> RAGChat:
 
 
 
+
 async def answer(question: str) -> str:
     return await get_chat().answer(question)
+
 
 

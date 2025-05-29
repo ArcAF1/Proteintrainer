@@ -1,4 +1,5 @@
 
+
 """Pydantic models for public API."""
 from __future__ import annotations
 
@@ -37,4 +38,5 @@ class EntryCreate(BaseModel):
 class SearchHit(BaseModel):
     entry: EntryOut
     score: float
+
 

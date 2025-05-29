@@ -6,6 +6,7 @@
 
 
 
+
 ├── src/
 
 
@@ -16,6 +17,7 @@
 │   ├── data_ingestion.py
 │   ├── rag_chat.py
 │   └── gui.py
+
 
 
 

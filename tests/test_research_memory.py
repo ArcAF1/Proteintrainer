@@ -1,3 +1,4 @@
+
 import sys
 from pathlib import Path
 import tempfile
@@ -27,3 +28,4 @@ def test_update_immutability():
         assert e1.id != e2.id
         entries = mem.list_entries()
         assert len(entries) == 2
+
