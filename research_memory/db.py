@@ -1,3 +1,4 @@
+
 """Database models and session helpers."""
 from __future__ import annotations
 
@@ -49,3 +50,4 @@ def get_engine(path: Path):
 
 def get_session(engine):
     return sessionmaker(bind=engine, future=True)()
+

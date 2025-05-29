@@ -12,6 +12,8 @@
 │   ├── data_ingestion.py
 │   ├── rag_chat.py
 │   └── gui.py
+
 └── tests/
     └── test_pipeline.py
+
 

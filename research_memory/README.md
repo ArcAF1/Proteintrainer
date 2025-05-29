@@ -1,3 +1,4 @@
+
 # research_memory
 
 A lightweight electronic lab notebook layer for offline RAG assistants.
@@ -20,10 +21,12 @@ Entry schema (entry table)
 +-------------+------------------+
 ```
 
+
 ## Quick Start
 
 ```bash
 pip install -e .
+
 python -m research_memory.cli new note "My first note" "Body text"
 python -m research_memory.cli search "first"
 ```
@@ -31,3 +34,4 @@ python -m research_memory.cli search "first"
 All data is stored under `~/research_memory/`.
 
 This package is MIT licensed and works fully offline.
+

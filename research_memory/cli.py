@@ -1,3 +1,4 @@
+
 """Command line interface for ResearchMemory."""
 from __future__ import annotations
 
