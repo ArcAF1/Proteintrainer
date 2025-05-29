@@ -3,12 +3,7 @@
 ├── requirements.txt
 ├── project_structure.txt
 ├── README.md
-├── research_memory/
-│   ├── __init__.py
-│   ├── db.py
-│   ├── models.py
-│   ├── cli.py
-│   └── README.md
+
 ├── src/
 │   ├── config.py
 │   ├── embeddings.py

@@ -1,11 +1,10 @@
-import sys
-from pathlib import Path
+
 import asyncio
 from unittest.mock import AsyncMock, patch
 
 import pytest
 
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 from src import rag_chat
 
 

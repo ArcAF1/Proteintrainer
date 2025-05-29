@@ -8,5 +8,5 @@ lxml==5.1.0
 beautifulsoup4==4.12.3
 pytest==8.2.1
 requests==2.32.2
-sqlalchemy==2.0.30
+
 

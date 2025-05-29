@@ -46,12 +46,5 @@ python src/data_ingestion.py
 ```
 This may take a long time and requires substantial disk space.
 
-## Research Memory
-An optional electronic lab notebook is provided under `research_memory/`.
-Install it in editable mode and use the CLI to store and search notes:
-```bash
-pip install -e ./research_memory
-python -m research_memory.cli new note "Title" "Body"
-```
 
 
