@@ -6,5 +6,5 @@ indexes/
 data/
 *.faiss
 *.bin
-research_memory/entries/
+
 

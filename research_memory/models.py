@@ -1,55 +1,40 @@
-"""Database models for research memory."""
+
+"""Pydantic models for public API."""
 from __future__ import annotations
-from datetime import datetime
-from typing import Optional
 
-from sqlalchemy import (
-    Column,
-    DateTime,
-    ForeignKey,
-    String,
-    Float,
-    Text,
-    JSON,
-    CheckConstraint,
-)
-from sqlalchemy.orm import declarative_base, relationship
-
-Base = declarative_base()
+from typing import List, Optional
+from pydantic import BaseModel, Field
 
 
-class Entry(Base):
-    """Represents a notebook entry."""
-
-    __tablename__ = "entry"
-
-    id = Column(String, primary_key=True)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
-    type = Column(
-        String,
-        CheckConstraint(
-            "type IN ('note','hypothesis','plan','observation','result','conclusion','question')"
-        ),
-        nullable=False,
-    )
-    title = Column(String, nullable=False)
-    body_md = Column(Text, nullable=False)
-    status = Column(String, default="open")
-    confidence = Column(Float)
-    tags = Column(String)
-    links = Column(JSON)
-    revises_id = Column(String, ForeignKey("entry.id"))
-
-    revises = relationship("Entry", remote_side=[id])
-    embedding = relationship("Embedding", uselist=False, back_populates="entry")
+class EntryBase(BaseModel):
+    id: str
+    created_at: str
+    type: str
+    title: str
+    body_md: str
+    status: str
+    confidence: Optional[float] = None
+    tags: Optional[str] = None
+    links: Optional[list] = None
+    revises_id: Optional[str] = None
 
 
-class Embedding(Base):
-    """Stores embeddings for entries."""
+class EntryOut(EntryBase):
+    pass
 
-    __tablename__ = "embedding"
 
-    entry_id = Column(String, ForeignKey("entry.id"), primary_key=True)
-    vector = Column(Text, nullable=False)
+class EntryCreate(BaseModel):
+    type: str
+    title: str
+    body: str
+    status: str = "open"
+    confidence: Optional[float] = None
+    tags: Optional[List[str]] = None
+    links: Optional[List[dict]] = None
+    revises_id: Optional[str] = None
 
-    entry = relationship("Entry", back_populates="embedding")
+
+class SearchHit(BaseModel):
+    entry: EntryOut
+    score: float
+

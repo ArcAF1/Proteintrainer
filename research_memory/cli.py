@@ -1,52 +1,56 @@
-"""Command-line interface for research memory."""
+
+"""Command line interface for ResearchMemory."""
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
+import json
 
-from .db import ResearchMemory, MemoryConfig
-from .embeddings import default_embedding_fn
+from . import ResearchMemory
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(prog="researchmem")
-    sub = parser.add_subparsers(dest="cmd", required=True)
+def get_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(prog="researchmem")
+    sub = p.add_subparsers(dest="cmd", required=True)
 
-    sub_new = sub.add_parser("new", help="create a new entry")
-    sub_new.add_argument("type")
-    sub_new.add_argument("title")
-    sub_new.add_argument("body")
+    new_p = sub.add_parser("new")
+    new_p.add_argument("type")
+    new_p.add_argument("title")
+    new_p.add_argument("body")
 
-    sub_search = sub.add_parser("search", help="search entries")
-    sub_search.add_argument("query")
-    sub_search.add_argument("-k", type=int, default=5)
+    search_p = sub.add_parser("search")
+    search_p.add_argument("query")
+    search_p.add_argument("-k", type=int, default=5)
 
-    sub_show = sub.add_parser("show", help="show entry")
-    sub_show.add_argument("id")
+    show_p = sub.add_parser("show")
+    show_p.add_argument("id")
 
-    sub_update = sub.add_parser("update", help="update status")
-    sub_update.add_argument("id")
-    sub_update.add_argument("--status", required=True)
-    sub_update.add_argument("--confidence", type=float)
+    update_p = sub.add_parser("update")
+    update_p.add_argument("id")
+    update_p.add_argument("--status", required=True)
+    update_p.add_argument("--confidence", type=float)
 
-    args = parser.parse_args()
-    mem = ResearchMemory(embedding_fn=default_embedding_fn)
+    return p
 
+
+def main(argv: list[str] | None = None) -> None:
+    parser = get_parser()
+    args = parser.parse_args(argv)
+    mem = ResearchMemory(embedding_fn=lambda t: [0.0])
     if args.cmd == "new":
-        entry = mem.add_entry(type=args.type, title=args.title, body=args.body)
-        print("Created", entry.id)
+        mem.add_entry(type=args.type, title=args.title, body=args.body)
     elif args.cmd == "search":
-        results = mem.search(args.query, k=args.k)
-        for ent, score in results:
-            print(f"{ent.id}\t{ent.title}\t{score:.3f}")
+        hits = mem.search(args.query, k=args.k)
+        for h in hits:
+            print(h.score, h.entry.id, h.entry.title)
     elif args.cmd == "show":
-        entries = mem.list_entries()
-        for e in entries:
-            if e.id == args.id:
-                print(e.body_md)
+        rows = mem.list_entries()
+        for r in rows:
+            if r.id == args.id:
+                print(json.dumps(r.model_dump(), indent=2))
                 break
     elif args.cmd == "update":
-        entry = mem.update_status(args.id, args.status, confidence=args.confidence)
-        print("Updated", entry.id)
+        mem.update_status(args.id, args.status, confidence=args.confidence)
 
 
 if __name__ == "__main__":
