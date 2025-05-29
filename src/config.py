@@ -17,6 +17,8 @@ class Settings(BaseModel):
     top_k: int = 5
     chunk_size: int = 400
 
+
+
     class Config:
         arbitrary_types_allowed = True
 

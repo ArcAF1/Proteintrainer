@@ -1,15 +1,19 @@
 # Offline Medical RAG Assistant
 
+
 This project provides a lightweight offline chat assistant for medical research. It uses open-source models and datasets to run entirely on a MacBook M1 with 16 GB RAM.
+
 
 
 **Disclaimer:** This software is for research purposes only and does **not** constitute medical advice.
 
 ## Setup
 1. Install [Homebrew](https://brew.sh/) if missing.
+
 2. Install Python 3.12 via Homebrew:
    ```bash
    brew install python@3.12
+
    ```
 3. Create a virtual environment and install dependencies:
    ```bash
@@ -17,6 +21,7 @@ This project provides a lightweight offline chat assistant for medical research.
    source venv/bin/activate
    pip install -r requirements.txt
    ```
+
 4. Download sentence-transformer and LLM weights manually (see `data_sources.json`).
 5. Place downloaded models under `models/` and datasets under `data/`.
 
@@ -36,9 +41,11 @@ Open the local address printed in the terminal. Chat responses will cite retriev
 
 ## Tests
 Run the basic pipeline test:
+
 ```bash
 pytest
 ```
+
 
 
 ## Data Sources
@@ -50,4 +57,5 @@ This may take a long time and requires substantial disk space.
 
 
 <
+
 

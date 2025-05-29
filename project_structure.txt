@@ -4,7 +4,9 @@
 ├── project_structure.txt
 ├── README.md
 
+
 ├── src/
+
 │   ├── config.py
 │   ├── embeddings.py
 │   ├── indexer.py
@@ -14,8 +16,10 @@
 │   └── gui.py
 
 
+
 └── tests/
     └── test_pipeline.py
+
 
 
 
