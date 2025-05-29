@@ -8,7 +8,13 @@ from __future__ import annotations
 import json
 import shutil
 from pathlib import Path
+
+
+
 from typing import Dict
+
+
+
 
 import requests
 from tqdm import tqdm
@@ -25,8 +31,16 @@ def download(url: str, dest: Path) -> Path:
     dest.parent.mkdir(parents=True, exist_ok=True)
     if dest.exists():
         return dest
+
+
+
+
+
     if "TODO" in url:
         raise ValueError(f"Download URL not provided for {dest.name}")
+
+
+
 
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
@@ -39,7 +53,15 @@ def download(url: str, dest: Path) -> Path:
 
 def extract_archive(archive: Path, out_dir: Path) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
+
+
+
+
     shutil.unpack_archive(str(archive), str(out_dir))
+
+
+
+
 
 
 def main() -> None:
@@ -50,7 +72,15 @@ def main() -> None:
             extract_archive(archive, settings.data_dir / name)
         except Exception as exc:  # pylint: disable=broad-except
             print(f"Failed {name}: {exc}")
+
+
+
+
             print("TODO: provide valid URL in data_sources.json")
+
+
+
+
 
 
 if __name__ == "__main__":

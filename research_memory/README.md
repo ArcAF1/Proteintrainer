@@ -1,18 +1,44 @@
+
+
+
 # research_memory
 
-Electronic lab notebook backend for RAG assistants.
+A lightweight electronic lab notebook layer for offline RAG assistants.
+
+```
+Entry schema (entry table)
++-------------+------------------+
+| column      | type             |
++=============+==================+
+| id          | TEXT PK          |
+| created_at  | DATETIME         |
+| type        | TEXT             |
+| title       | TEXT             |
+| body_md     | TEXT             |
+| status      | TEXT             |
+| confidence  | REAL             |
+| tags        | TEXT             |
+| links       | JSON             |
+| revises_id  | TEXT FK->entry   |
++-------------+------------------+
+```
+
+
 
 ## Quick Start
 
 ```bash
 pip install -e .
-researchmem new note "My first note"
+
+
+
+python -m research_memory.cli new note "My first note" "Body text"
+python -m research_memory.cli search "first"
 ```
 
-## Schema
+All data is stored under `~/research_memory/`.
 
-```
-entry(id PK, created_at, type, title, body_md, status, confidence,
-      tags, links, revises_id)
-embedding(entry_id FK, vector BLOB)
-```
+This package is MIT licensed and works fully offline.
+
+
+
