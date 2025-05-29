@@ -18,7 +18,9 @@ def main() -> None:
         gr.Markdown("# Offline Medical Assistant\n*Not medical advice*")
         gr.ChatInterface(fn=chat)
 
+
     demo.launch()
+
 
 
 

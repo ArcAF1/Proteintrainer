@@ -5,7 +5,9 @@
 ├── README.md
 
 
+
 ├── src/
+
 
 │   ├── config.py
 │   ├── embeddings.py
@@ -17,8 +19,10 @@
 
 
 
+
 └── tests/
     └── test_pipeline.py
+
 
 
 

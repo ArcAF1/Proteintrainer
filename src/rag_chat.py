@@ -1,14 +1,17 @@
+
 """RAG pipeline functions.
 
 Usage example:
     from rag_chat import answer
     response = asyncio.run(answer("What is aspirin?"))
+
 """
 from __future__ import annotations
 
 import asyncio
 import pickle
 from pathlib import Path
+
 
 from typing import List
 
@@ -19,16 +22,20 @@ import faiss
 import numpy as np
 from ctransformers import AutoModelForCausalLM
 
+
 from .config import settings
 from .embeddings import Embedder
 
 
+
 class RAGChat:
+
     def __init__(self) -> None:
         self.embedder = Embedder()
         index_path = settings.index_dir / "pmc.faiss"
         store_path = settings.index_dir / "pmc.pkl"
         if not index_path.exists() or not store_path.exists():
+
             raise FileNotFoundError("Index files not found. Run indexer first.")
 
 
@@ -44,10 +51,12 @@ class RAGChat:
             model_type="llama",
         )
 
+
     def retrieve(self, query: str) -> List[str]:
         vector = self.embedder.encode(query).reshape(1, -1)
         scores, ids = self.index.search(vector, settings.top_k)
         return [self.docs[i] for i in ids[0]]
+
 
 
     async def generate(self, prompt: str) -> str:
@@ -66,6 +75,7 @@ _chat = None
 
 
 
+
 def get_chat() -> RAGChat:
     global _chat
 
@@ -75,6 +85,8 @@ def get_chat() -> RAGChat:
 
 
 
+
 async def answer(question: str) -> str:
     return await get_chat().answer(question)
+
 

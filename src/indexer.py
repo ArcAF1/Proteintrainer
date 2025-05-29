@@ -6,7 +6,9 @@ Usage example:
 from pathlib import Path
 import pickle
 
+
 from typing import Iterable
+
 
 
 import faiss
