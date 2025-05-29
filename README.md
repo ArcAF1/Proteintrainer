@@ -2,6 +2,7 @@
 
 This project provides a lightweight offline chat assistant for medical research. It uses open-source models and datasets to run entirely on a MacBook M1 with 16 GB RAM.
 
+
 **Disclaimer:** This software is for research purposes only and does **not** constitute medical advice.
 
 ## Setup

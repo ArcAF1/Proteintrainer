@@ -5,7 +5,9 @@ from unittest.mock import AsyncMock, patch
 import pytest
 
 
+
 from src import rag_chat
+
 
 
 @pytest.mark.asyncio
