@@ -1,0 +1,25 @@
+.
+├── .gitignore
+├── requirements.txt
+├── project_structure.txt
+├── README.md
+├── src/
+│   ├── config.py
+│   ├── embeddings.py
+│   ├── indexer.py
+│   ├── data_sources.json
+│   ├── data_ingestion.py
+│   ├── rag_chat.py
+│   └── gui.py
+├── research_memory/
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── db.py
+│   ├── models.py
+│   ├── embeddings.py
+│   ├── cli.py
+│   └── README.md
+└── tests/
+    ├── test_pipeline.py
+    └── test_memory.py
+
