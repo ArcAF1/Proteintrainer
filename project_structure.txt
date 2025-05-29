@@ -3,6 +3,7 @@
 ├── requirements.txt
 ├── project_structure.txt
 ├── README.md
+
 ├── src/
 │   ├── config.py
 │   ├── embeddings.py

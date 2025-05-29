@@ -2,9 +2,6 @@
 
 This project provides a lightweight offline chat assistant for medical research. It uses open-source models and datasets to run entirely on a MacBook M1 with 16 GB RAM.
 
-The default chat model shipped with this project is **Mistral 7B** in a quantised format for Apple Silicon.
-
-All installed dependencies are MIT licensed. You must comply with the MIT license terms when using or distributing this code and its dependencies.
 
 **Disclaimer:** This software is for research purposes only and does **not** constitute medical advice.
 
@@ -49,5 +46,6 @@ Dataset download links are placeholders in `src/data_sources.json`. Fill them in
 python src/data_ingestion.py
 ```
 This may take a long time and requires substantial disk space.
+
 
 
