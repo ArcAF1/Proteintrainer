@@ -1,0 +1,11 @@
+faiss-cpu==1.8.0
+sentence-transformers==2.6.1
+ollama==0.1.5
+gradio==4.21.0
+pydantic==2.7.1
+tqdm==4.66.4
+lxml==5.1.0
+beautifulsoup4==4.12.3
+pytest==8.2.1
+requests==2.32.2
+
