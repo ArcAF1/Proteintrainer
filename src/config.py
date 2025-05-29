@@ -1,4 +1,5 @@
 """Configuration for paths and model settings.
+
 Usage example:
     from config import settings
     print(settings.data_dir)
@@ -15,10 +16,12 @@ class Settings(BaseModel):
     llm_model: str = "mistral-7b-instruct.Q4_0.gguf"
     top_k: int = 5
     chunk_size: int = 400
-    max_prompt_chars: int = 6000
+
+
 
     class Config:
         arbitrary_types_allowed = True
 
 
 settings = Settings()
+

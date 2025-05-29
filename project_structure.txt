@@ -3,10 +3,10 @@
 ├── requirements.txt
 ├── project_structure.txt
 ├── README.md
-├── setup.sh
-├── uninstall.sh
+
+
 ├── src/
-│   ├── __init__.py
+
 │   ├── config.py
 │   ├── embeddings.py
 │   ├── indexer.py
@@ -14,7 +14,12 @@
 │   ├── data_ingestion.py
 │   ├── rag_chat.py
 │   └── gui.py
+
+
+
 └── tests/
-    ├── conftest.py
-    ├── test_pipeline.py
-    └── test_safety.py
+    └── test_pipeline.py
+
+
+
+

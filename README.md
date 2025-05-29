@@ -1,14 +1,19 @@
 # Offline Medical RAG Assistant
 
-This project provides a lightweight offline chat assistant for medical research running entirely on a Mac M1.
+
+This project provides a lightweight offline chat assistant for medical research. It uses open-source models and datasets to run entirely on a MacBook M1 with 16 GB RAM.
+
+
 
 **Disclaimer:** This software is for research purposes only and does **not** constitute medical advice.
 
 ## Setup
 1. Install [Homebrew](https://brew.sh/) if missing.
-2. Install build tools and Python:
+
+2. Install Python 3.12 via Homebrew:
    ```bash
-   brew install cmake pkg-config libomp openssl@3 python@3.12
+   brew install python@3.12
+
    ```
 3. Create a virtual environment and install dependencies:
    ```bash
@@ -16,31 +21,41 @@ This project provides a lightweight offline chat assistant for medical research 
    source venv/bin/activate
    pip install -r requirements.txt
    ```
-4. Download the LLM weights (mistral-7b-instruct Q4_0) and datasets listed in `src/data_sources.json`. DrugBank requires a free account; do not redistribute their XML.
-5. Place models under `models/` and extracted text files under `data/`.
-6. Optionally run `./setup.sh` to automate these steps.
+
+4. Download sentence-transformer and LLM weights manually (see `data_sources.json`).
+5. Place downloaded models under `models/` and datasets under `data/`.
 
 ## Building the Index
-Adjust `chunk_size` and `top_k` in `src/config.py` if needed. Then run:
+Run the indexer after datasets are prepared:
 ```bash
 python src/indexer.py
 ```
-This creates `indexes/pmc.faiss` and `pmc.pkl` for retrieval.
+This generates `indexes/pmc.faiss` used for retrieval.
 
 ## Running the Chat UI
+Start the Gradio interface:
 ```bash
 python src/gui.py
 ```
-Open the local address printed in the terminal. The UI binds to `127.0.0.1` by default.
+Open the local address printed in the terminal. Chat responses will cite retrieved text passages.
 
 ## Tests
+Run the basic pipeline test:
+
 ```bash
 pytest
 ```
 
+
+
 ## Data Sources
-URLs for open datasets are provided in `src/data_sources.json`. Review their licenses before use. Run:
+Dataset download links are placeholders in `src/data_sources.json`. Fill them in and execute:
 ```bash
 python src/data_ingestion.py
 ```
-Indexing large datasets may consume >30 GB disk. Run `./uninstall.sh` to remove models and index files.
+This may take a long time and requires substantial disk space.
+
+
+<
+
+

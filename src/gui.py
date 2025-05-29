@@ -1,4 +1,5 @@
 """Gradio chat interface.
+
 Usage example:
     python src/gui.py
 """
@@ -16,8 +17,11 @@ def main() -> None:
     with gr.Blocks() as demo:
         gr.Markdown("# Offline Medical Assistant\n*Not medical advice*")
         gr.ChatInterface(fn=chat)
-    demo.launch(server_name="127.0.0.1")
+
+    demo.launch()
+
 
 
 if __name__ == "__main__":
     main()
+

@@ -1,4 +1,5 @@
 """RAG pipeline functions.
+
 Usage example:
     from rag_chat import answer
     response = asyncio.run(answer("What is aspirin?"))
@@ -8,10 +9,13 @@ from __future__ import annotations
 import asyncio
 import pickle
 from pathlib import Path
-from typing import List, Dict
-from threading import Lock
+
+from typing import List
+
 
 import faiss
+
+
 import numpy as np
 from ctransformers import AutoModelForCausalLM
 
@@ -26,22 +30,25 @@ class RAGChat:
         store_path = settings.index_dir / "pmc.pkl"
         if not index_path.exists() or not store_path.exists():
             raise FileNotFoundError("Index files not found. Run indexer first.")
+
+
+
         self.index = faiss.read_index(str(index_path))
         with open(store_path, "rb") as fh:
-            store = pickle.load(fh)
-            self.docs = store["docs"]
-            self.meta = store["meta"]
+            self.docs = pickle.load(fh)
         model_path = settings.model_dir / settings.llm_model
-        if not model_path.exists() or model_path.suffix not in {".gguf", ".ggml"}:
-            raise FileNotFoundError(f"LLM weights missing or invalid: {model_path}")
-        self.llm = AutoModelForCausalLM.from_pretrained(model_path, model_type="llama")
+        if not model_path.exists():
+            raise FileNotFoundError(f"LLM weights missing: {model_path}")
+        self.llm = AutoModelForCausalLM.from_pretrained(
+            model_path,
+            model_type="llama",
+        )
 
-    def retrieve(self, query: str) -> List[Dict[str, str]]:
+    def retrieve(self, query: str) -> List[str]:
         vector = self.embedder.encode(query).reshape(1, -1)
         scores, ids = self.index.search(vector, settings.top_k)
-        return [
-            {"text": self.docs[i], **self.meta[i]} for i in ids[0]
-        ]
+        return [self.docs[i] for i in ids[0]]
+
 
     async def generate(self, prompt: str) -> str:
         loop = asyncio.get_running_loop()
@@ -49,24 +56,25 @@ class RAGChat:
 
     async def answer(self, question: str) -> str:
         docs = self.retrieve(question)
-        context = "\n---\n".join(d["text"] for d in docs)
+
+        context = "\n---\n".join(docs)
         prompt = f"Context:\n{context}\n\nQuestion: {question}\nAnswer:"
-        if len(prompt) > settings.max_prompt_chars:
-            prompt = prompt[-settings.max_prompt_chars :]
         return await self.generate(prompt)
 
 
-_chat: RAGChat | None = None
-_lock = Lock()
+_chat = None
+
 
 
 def get_chat() -> RAGChat:
     global _chat
-    with _lock:
-        if _chat is None:
-            _chat = RAGChat()
-        return _chat
+
+    if _chat is None:
+        _chat = RAGChat()
+    return _chat
+
 
 
 async def answer(question: str) -> str:
     return await get_chat().answer(question)
+
