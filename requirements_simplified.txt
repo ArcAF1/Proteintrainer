@@ -1,0 +1,71 @@
+# Simplified requirements to avoid resolution-too-deep errors
+# Install in phases using install_phases.py for best results
+
+# Phase 1: Core utilities
+packaging>=23.2
+pyyaml
+python-dotenv
+markupsafe>=2.0
+requests
+tqdm
+rich>=13.0.0
+click>=8.0.0
+structlog
+
+# Phase 2: Data processing foundation
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Phase 3: Core ML (the big ones)
+torch>=2.0
+transformers>=4.36.0
+datasets>=2.16.0
+accelerate>=0.25.0
+safetensors>=0.4.0
+einops>=0.7.0
+
+# Phase 4: Specialized ML
+faiss-cpu
+sentence-transformers
+huggingface-hub>=0.20.0
+peft>=0.7.0
+evaluate>=0.4.0
+
+# Phase 5: NLP processing
+spacy>=3.7,<3.8
+scispacy
+nltk>=3.8.0
+
+# Phase 6: Web/API frameworks
+fastapi>=0.104.0
+gradio>=4.21.0
+pydantic>=2.5.0
+
+# Phase 7: Biomedical packages
+biopython>=1.81
+pubchempy>=1.0.4
+neo4j>=5.19.0
+neo4j-graphrag>=1.7.0
+
+# Phase 8: LangChain (upgrade to compatible versions)
+langchain-core>=0.3.0
+langchain-openai>=0.3.0
+langchain-community>=0.3.0
+langchain>=0.3.0
+
+# Phase 9: Optional (install individually as some may fail)
+# ctransformers==0.2.27
+# bitsandbytes>=0.41.0
+# mlx>=0.0.6
+# mlx-lm>=0.0.6
+# llama-cpp-python
+# memory-profiler>=0.61.0
+# psutil
+# GPUtil
+# tensorboard>=2.14.0
+# wandb>=0.15.0
+# ragas>=0.0.18 

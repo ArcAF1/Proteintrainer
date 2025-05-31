@@ -1,0 +1,52 @@
+name: "Overnight Training"
+description: "8-hour training on multiple datasets"
+
+# Model settings
+base_model: "mistralai/Mistral-7B-Instruct-v0.2"
+max_seq_length: 2048
+load_in_4bit: true
+
+# LoRA settings
+lora_r: 32
+lora_alpha: 64
+lora_dropout: 0.05
+target_modules:
+  - "q_proj"
+  - "k_proj"
+  - "v_proj"
+  - "o_proj"
+  - "gate_proj"
+  - "up_proj"
+  - "down_proj"
+
+# Training parameters
+learning_rate: 2e-4
+num_epochs: 2
+max_steps: 2000
+per_device_train_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 8
+warmup_steps: 100
+
+# Memory optimization
+gradient_checkpointing: true
+dataloader_pin_memory: false
+fp16: false
+bf16: true
+
+# Evaluation
+evaluation_strategy: "steps"
+eval_steps: 200
+save_steps: 400
+logging_steps: 50
+
+# Data settings
+max_examples: 10000
+selected_datasets:
+  - "hetionet"
+  - "chembl_sqlite"
+  - "clinical_trials"
+
+# Output
+output_dir: "models/overnight"
+logging_dir: "logs/overnight" 

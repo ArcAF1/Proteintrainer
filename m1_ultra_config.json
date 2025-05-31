@@ -1,0 +1,75 @@
+{
+  "_comment": "Ultra performance config for M1 MacBook Pro - Maximum speed, use when dedicating Mac to AI",
+  "hardware": {
+    "model": "MacBook Pro 13-inch M1",
+    "memory_gb": 16,
+    "processor": "Apple M1",
+    "gpu_cores": 8,
+    "neural_engine": true
+  },
+  "llm_config": {
+    "n_gpu_layers": 32,
+    "n_ctx": 8192,
+    "n_batch": 1024,
+    "f16_kv": true,
+    "use_mlock": true,
+    "n_threads": 8,
+    "use_metal": true,
+    "metal_device": 0,
+    "low_vram": false,
+    "use_mmap": true,
+    "numa": false,
+    "max_tokens": 2048,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "rope_freq_base": 10000,
+    "rope_freq_scale": 1.0,
+    "offload_kqv": true,
+    "mul_mat_q": true
+  },
+  "memory_limits": {
+    "max_system_usage_percent": 95,
+    "max_app_memory_gb": 14,
+    "reserve_for_system_gb": 2,
+    "reserve_for_other_apps_gb": 0
+  },
+  "embeddings": {
+    "force_cpu": false,
+    "use_metal": true,
+    "batch_size": 128,
+    "max_sequence_length": 768,
+    "model_size": "large",
+    "cache_embeddings": true
+  },
+  "data_processing": {
+    "max_concurrent_files": 8,
+    "chunk_size_kb": 1024,
+    "use_streaming": true,
+    "cache_limit_mb": 4096,
+    "parallel_processing": true
+  },
+  "neo4j": {
+    "memory_limit": "3G",
+    "page_cache": "2G",
+    "heap_initial": "1G",
+    "heap_max": "2G"
+  },
+  "performance": {
+    "priority": "maximum_speed",
+    "background_processing": true,
+    "aggressive_gc": false,
+    "conservative_mode": false,
+    "use_flash_attention": true,
+    "enable_metal_performance_shaders": true,
+    "gpu_memory_fraction": 0.95
+  },
+  "inference_optimizations": {
+    "use_quantization": "q4_K_M",
+    "prompt_cache": true,
+    "kv_cache_optimization": true,
+    "continuous_batching": true,
+    "dynamic_temperature": true,
+    "speculative_decoding": true,
+    "flash_attention_2": true
+  }
+} 

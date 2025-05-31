@@ -1,0 +1,34 @@
+# Medical Research System Requirements
+# Install with: pip install -r requirements_medical.txt
+
+# Core dependencies (already in main requirements.txt)
+gradio>=3.50.0
+torch>=2.0.0
+transformers>=4.30.0
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.4
+numpy>=1.24.0
+
+# Vector database
+chromadb>=0.4.0
+
+# Medical database APIs
+arxiv>=1.4.8
+requests>=2.31.0
+xml.etree.ElementTree  # Built-in
+
+# Additional NLP for medical text
+spacy>=3.5.0
+scispacy>=0.5.3
+# Run after install: python -m spacy download en_core_sci_sm
+
+# Knowledge validation
+scikit-learn>=1.3.0
+
+# Async support
+aiohttp>=3.8.0
+asyncio  # Built-in
+
+# Data processing
+pandas>=2.0.0
+lxml>=4.9.0 

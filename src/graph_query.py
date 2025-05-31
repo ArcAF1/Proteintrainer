@@ -1,7 +1,7 @@
 """Query functions for Neo4j graph."""
 from __future__ import annotations
 
-from typing import List
+from typing import List, Tuple, Dict
 
 from neo4j import Driver
 
@@ -50,6 +50,113 @@ def find_connections(name1: str, name2: str) -> str:
     return path_str
 
 
+def get_subgraph(entity_name: str, max_depth: int = 2) -> Tuple[List[Dict], List[Dict]]:
+    """Get subgraph around an entity for visualization.
+    
+    Returns:
+        Tuple of (nodes, edges) where:
+        - nodes: List of dicts with 'name' and 'type' keys
+        - edges: List of dicts with 'source', 'target', and 'type' keys
+    """
+    driver: Driver = get_driver()
+    nodes = []
+    edges = []
+    node_set = set()
+    
+    try:
+        with driver.session() as session:
+            # Get nodes and relationships within max_depth of the entity
+            result = session.run(
+                f"""
+                MATCH (n {{name: $name}})
+                CALL apoc.path.subgraphAll(n, {{
+                    maxLevel: $depth,
+                    relationshipFilter: null,
+                    labelFilter: null
+                }})
+                YIELD nodes, relationships
+                RETURN nodes, relationships
+                """,
+                name=entity_name,
+                depth=max_depth
+            )
+            
+            record = result.single()
+            if not record:
+                # Fallback to simpler query if APOC is not available
+                result = session.run(
+                    """
+                    MATCH (n {name: $name})
+                    OPTIONAL MATCH (n)-[r]-(m)
+                    RETURN n, collect(DISTINCT m) as connected_nodes, collect(DISTINCT r) as relationships
+                    """,
+                    name=entity_name
+                )
+                record = result.single()
+                if record:
+                    # Add central node
+                    central_node = record['n']
+                    node_name = central_node.get('name', str(central_node.id))
+                    node_type = list(central_node.labels)[0] if central_node.labels else 'Unknown'
+                    nodes.append({'name': node_name, 'type': node_type})
+                    node_set.add(node_name)
+                    
+                    # Add connected nodes
+                    for node in record['connected_nodes']:
+                        if node:
+                            node_name = node.get('name', str(node.id))
+                            node_type = list(node.labels)[0] if node.labels else 'Unknown'
+                            if node_name not in node_set:
+                                nodes.append({'name': node_name, 'type': node_type})
+                                node_set.add(node_name)
+                    
+                    # Add relationships
+                    for rel in record['relationships']:
+                        if rel:
+                            start_node = rel.start_node
+                            end_node = rel.end_node
+                            source = start_node.get('name', str(start_node.id))
+                            target = end_node.get('name', str(end_node.id))
+                            edges.append({
+                                'source': source,
+                                'target': target,
+                                'type': rel.type
+                            })
+            else:
+                # Process APOC results
+                for node in record['nodes']:
+                    node_name = node.get('name', str(node.id))
+                    node_type = list(node.labels)[0] if node.labels else 'Unknown'
+                    if node_name not in node_set:
+                        nodes.append({'name': node_name, 'type': node_type})
+                        node_set.add(node_name)
+                
+                for rel in record['relationships']:
+                    start_node = rel.start_node
+                    end_node = rel.end_node
+                    source = start_node.get('name', str(start_node.id))
+                    target = end_node.get('name', str(end_node.id))
+                    edges.append({
+                        'source': source,
+                        'target': target,
+                        'type': rel.type
+                    })
+    
+    except Exception as e:
+        print(f"Error getting subgraph: {e}")
+        # Return minimal data if there's an error
+        nodes = [{'name': entity_name, 'type': 'Unknown'}]
+        edges = []
+    
+    finally:
+        driver.close()
+    
+    return nodes, edges
+
+
 if __name__ == "__main__":
     print(search_entity("creatine"))
     print(find_connections("creatine", "insulin"))
+    nodes, edges = get_subgraph("creatine")
+    print(f"Nodes: {nodes}")
+    print(f"Edges: {edges}")

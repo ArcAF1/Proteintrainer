@@ -1,0 +1,50 @@
+name: "Quick Test Training"
+description: "Fast training for testing (10 minutes)"
+
+# Model settings
+base_model: "mistralai/Mistral-7B-Instruct-v0.2"
+max_seq_length: 1024
+load_in_4bit: true
+
+# LoRA settings
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+target_modules:
+  - "q_proj"
+  - "k_proj" 
+  - "v_proj"
+  - "o_proj"
+  - "gate_proj"
+  - "up_proj"
+  - "down_proj"
+
+# Training parameters
+learning_rate: 5e-4
+num_epochs: 1
+max_steps: 100
+per_device_train_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 4
+warmup_steps: 10
+
+# Memory optimization
+gradient_checkpointing: true
+dataloader_pin_memory: false
+fp16: false
+bf16: true
+
+# Evaluation
+evaluation_strategy: "steps"
+eval_steps: 25
+save_steps: 50
+logging_steps: 10
+
+# Data settings
+max_examples: 500
+selected_datasets:
+  - "hetionet"
+
+# Output
+output_dir: "models/quick_test"
+logging_dir: "logs/quick_test" 

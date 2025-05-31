@@ -1,0 +1,64 @@
+name: "Full Production Training"
+description: "Complete 2-3 day training on all datasets"
+
+# Model settings
+base_model: "mistralai/Mistral-7B-Instruct-v0.2"
+max_seq_length: 2048
+load_in_4bit: true
+
+# LoRA settings
+lora_r: 64
+lora_alpha: 128
+lora_dropout: 0.05
+target_modules:
+  - "q_proj"
+  - "k_proj"
+  - "v_proj"
+  - "o_proj"
+  - "gate_proj"
+  - "up_proj"
+  - "down_proj"
+
+# Training parameters
+learning_rate: 2e-4
+num_epochs: 3
+max_steps: -1  # Full training
+per_device_train_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 16
+warmup_steps: 500
+
+# Memory optimization
+gradient_checkpointing: true
+dataloader_pin_memory: false
+fp16: false
+bf16: true
+
+# Evaluation
+evaluation_strategy: "steps"
+eval_steps: 500
+save_steps: 1000
+logging_steps: 100
+
+# Data settings
+max_examples: 50000
+selected_datasets:
+  - "hetionet"
+  - "chembl_sqlite"
+  - "clinical_trials"
+  - "pubmed"
+
+# Output
+output_dir: "models/full_production"
+logging_dir: "logs/full_production"
+
+# Advanced settings
+weight_decay: 0.01
+adam_beta1: 0.9
+adam_beta2: 0.999
+adam_epsilon: 1e-8
+max_grad_norm: 1.0
+
+# Safety validation
+enable_safety_validation: true
+safety_check_frequency: 100 

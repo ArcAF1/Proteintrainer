@@ -1,0 +1,53 @@
+{
+  "_comment": "Slightly less conservative configuration for 13-inch M1 MacBook Pro (16GB) - increased stability",
+  "hardware": {
+    "model": "MacBook Pro 13-inch M1",
+    "memory_gb": 16,
+    "shared_usage": true,
+    "other_apps_running": true
+  },
+  "llm_config": {
+    "n_gpu_layers": 0,
+    "n_ctx": 2048,
+    "n_batch": 8,
+    "f16_kv": false,
+    "use_mlock": false,
+    "n_threads": 8,
+    "low_vram": true,
+    "use_mmap": true,
+    "numa": false,
+    "max_tokens": 600,
+    "temperature": 0.3,
+    "top_p": 0.8
+  },
+  "memory_limits": {
+    "max_system_usage_percent": 70,
+    "max_app_memory_gb": 5,
+    "reserve_for_system_gb": 6,
+    "reserve_for_other_apps_gb": 5
+  },
+  "embeddings": {
+    "force_cpu": true,
+    "batch_size": 16,
+    "max_sequence_length": 384,
+    "model_size": "small"
+  },
+  "data_processing": {
+    "max_concurrent_files": 1,
+    "chunk_size_kb": 128,
+    "use_streaming": true,
+    "cache_limit_mb": 512
+  },
+  "neo4j": {
+    "memory_limit": "1G",
+    "page_cache": "512M",
+    "heap_initial": "256M",
+    "heap_max": "512M"
+  },
+  "performance": {
+    "priority": "stability",
+    "background_processing": false,
+    "aggressive_gc": true,
+    "conservative_mode": true
+  }
+} 
